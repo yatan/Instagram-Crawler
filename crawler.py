@@ -50,7 +50,11 @@ class Crawler(Thread):
                             #if set('[~!@#$%^&*()_+{}":;\']+$').intersection(element):
                             #print element
         self.file_users.close()
-        print self.users
+
+
+    def join( self ):
+        Thread.join( self )
+        return self.users
 
 
 
@@ -58,7 +62,7 @@ class Crawler(Thread):
 # Llista threads actius
 e = Crawler(active_user)
 e.start()
-
+print e.join()
 
 
 #print '*****' + str(coses)
