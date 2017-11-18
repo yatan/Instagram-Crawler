@@ -8,7 +8,9 @@ driver.get(url)
 
 soup = BeautifulSoup(driver.page_source, "html.parser")
 
-for x in soup.findAll('img'):
-    print x
+for foto in soup.findAll('img'):
+    print foto.get('alt', '')
+    print foto.get('src', '')
+
 
 driver.close()
