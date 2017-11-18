@@ -1,23 +1,33 @@
 
  
 block content
-  h1= title
-  p Welcome to #{title}
+  if(links)
+    h1 #{title} #{user}
+  else
+    h1= title
+    p Welcome to #{title}
   table
     thead
       tr
-        th Nombre
+        if(links)
+            th Links
+        else
+            th Nombre
         //th Edad
     tbody
-      
+     //- 
+        if(links)
+            tr
+            td=usuario.nickname
+            td=usuario.link
+
     if(links)
-        tr
-        td=usuario.nickname
-        td=usuario.link
-
-
-    for usuario in usuarios
-        tr
-        td
-            a(href="/?name="+usuario)= usuario
+        for link in links
+            tr
+            td=link
+    else
+        for usuario in usuarios
+            tr
+            td
+                a(href="/?name="+usuario)= usuario
         //td=usuario.edad
