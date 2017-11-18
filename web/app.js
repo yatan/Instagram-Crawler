@@ -19,11 +19,23 @@ db.close();
 
 
 app.get('/', function (req, res) {
-  //res.send('Hello World!');
-  res.render('index', { 
-    title: 'Userlist',
-    usuarios : usuaris
-    });
+  if ( typeof req.query.name !== 'undefined' && req.query.name )
+  {
+    let usuari = req.query.name;
+    //console.log(req.query.name);
+    res.render('index', { 
+      title: 'Links from user',
+      user: usuari,
+      usuarios : usuaris
+      });
+  }
+  else
+  {
+    res.render('index', { 
+      title: 'Userlist',
+      usuarios : usuaris
+      });
+  }
 });
 
 app.set('views', path.join(__dirname, 'views'));
