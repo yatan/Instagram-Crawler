@@ -1,5 +1,6 @@
 from clarifai import rest
 from clarifai.rest import ClarifaiApp
+import os
 
 url1 = "https://scontent-mad1-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/22500209_124269068257773_2270043748131930112_n.jpg"
 
