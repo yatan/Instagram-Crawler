@@ -1,0 +1,17 @@
+
+ 
+block content
+  h1= title
+  p Welcome to #{title}
+  table
+    thead
+      tr
+        th Nombre
+        //th Edad
+    tbody
+      //si hay más de un usuario
+
+    for usuario in usuarios
+        tr
+        td=usuario
+        //td=usuario.edad

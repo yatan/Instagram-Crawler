@@ -1,31 +1,34 @@
 var express = require('express');
 var app = express();
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database(':memory:');
+var db = new sqlite3.Database('./data/crawler');
+var path = require('path');
+
+var usuaris = [];
 
 db.serialize(function() {
 
-  db.run('CREATE TABLE lorem (info TEXT)');
-  var stmt = db.prepare('INSERT INTO lorem VALUES (?)');
-
-  for (var i = 0; i < 10; i++) {
-    stmt.run('Ipsum ' + i);
-  }
-
-  stmt.finalize();
-
-  db.each('SELECT rowid AS id, info FROM lorem', function(err, row) {
-    console.log(row.id + ': ' + row.info);
+  db.each('SELECT * FROM users', function(err, row) {
+    usuaris.push(row.nickname);
+    // console.log(row.nickname);
   });
+
 });
 
 db.close();
 
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  //res.send('Hello World!');
+  res.render('index', { 
+    title: 'Userlist',
+    usuarios : usuaris
+    });
 });
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('Example app listening on http://localhost:3000 !');
 });
