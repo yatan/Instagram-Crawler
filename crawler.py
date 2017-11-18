@@ -1,20 +1,44 @@
 import urllib2
 import sys
-import re
+# import re
+import threading
+
 from bs4 import BeautifulSoup
 #from BeautifulSoup import BeautifulSoup
 
-#GET user value from argument or using 'default'
+# GET user value from argument or using 'default'
 active_user = "twittersoz"
 if len(sys.argv) == 2:
     active_user = sys.argv[1]
 
+
+# Thread worker for active_user
+def worker(active_user):
+    print "Analizyng user: " + active_user
+
+
+    
+
+    return
+
+# Llista threads actius
+threads = list()
+
+t = threading.Thread(target=worker, args=(active_user,))
+threads.append(t)
+t.start()
+
+# Parse active user
 response = urllib2.urlopen('https://www.instagram.com/' + active_user)
 html = response.read()
 soup = BeautifulSoup(html, "html.parser")
 
+
 users = []
-file_users = open("users.txt","w") 
+scanned_users = []
+
+
+file_users = open("users_" + active_user + ".txt","w") 
 
 
 def parse_users(soup):
