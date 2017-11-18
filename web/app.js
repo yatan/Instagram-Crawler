@@ -22,10 +22,14 @@ function get_links(username) {
 
     db.serialize(function () {
       var links = [];
-      db.each("SELECT * FROM links WHERE nickname=?", username, function (err, row) {
-        links.push(row.link);
+      db.all("SELECT * FROM links WHERE nickname=?", username, function (err, rows) {
+        rows.forEach(element => {
+          links.push(element.link);
+        });
+        //links.push(row.link);
          //console.log(JSON.stringify(links));
-         resolve(links);
+         console.log(links);
+      resolve(links);
       });
 
     });
