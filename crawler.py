@@ -14,11 +14,11 @@ if len(sys.argv) == 2:
 class Crawler(Thread):
     users = []
     scanned_users = []
-    file_users = file
+    active_user = ""
 
     def __init__(self, active_user):
         Thread.__init__(self)
-        print("In __init__")
+        self.active_user = active_user
 
     # Thread worker for active_user
     def run (self):
@@ -28,11 +28,12 @@ class Crawler(Thread):
         response = urllib2.urlopen('https://www.instagram.com/' + active_user)
         html = response.read()
         soup = BeautifulSoup(html, "html.parser")
-
-        self.file_users = open("users_" + active_user + ".txt","w") 
-
+        # Parse users
         self.parse_users(soup)
+
+
     def parse_users(self, soup):
+        file_users = open("users_" + active_user + ".txt","w") 
         for coses in soup.find_all('a'):
             #print coses.get('a')
             #nicks = coses.find_all('a')
@@ -45,11 +46,15 @@ class Crawler(Thread):
                             usuari = element.replace("@", "")
                             if usuari not in self.users:
                                 self.users.append(usuari)
-                                self.file_users.write(usuari + "\n")
+                                file_users.write(usuari + "\n")
                             #if re.match(r'.*[\%\$\^\*\@\!\_\-\(\)\:\;\'\"\{\}\[\]].*', element):
                             #if set('[~!@#$%^&*()_+{}":;\']+$').intersection(element):
                             #print element
-        self.file_users.close()
+        file_users.close()
+        #Add user to users analized
+        file_users_analized = open("analized_users.txt","w")
+        file_users_analized.write(self.active_user + "\n")
+        file_users_analized.close() 
 
 
     def join( self ):
