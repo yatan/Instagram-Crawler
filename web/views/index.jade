@@ -3,6 +3,7 @@
 block content
   if(links)
     h1 #{title} #{user}
+    a(href="/") HOME
   else
     h1= title
     p Welcome to #{title}
@@ -11,6 +12,7 @@ block content
       tr
         if(links)
             th Links
+            th Image
         else
             th Nombre
         //th Edad
@@ -25,6 +27,9 @@ block content
         for link in links
             tr
             td=link
+            td 
+                img(src=link)
+            
     else
         for usuario in usuarios
             tr
