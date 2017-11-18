@@ -16,19 +16,21 @@ db.serialize(function () {
 
 
 
-function get_links(username, callback) {
-  
-  db.serialize(function () {
-    var links = [];
-    db.each("SELECT * FROM links WHERE nickname=?",username , function (err, row) {
-      links.push(row.link);
-/*    console.log(JSON.stringify(links));
-      return(JSON.stringify(links)); */
-    });
+function get_links(username) {
 
-    console.log(links);
-    return JSON.stringify(links);
+  return new Promise(function (resolve, reject) {
+
+    db.serialize(function () {
+      var links = [];
+      db.each("SELECT * FROM links WHERE nickname=?", username, function (err, row) {
+        links.push(row.link);
+         //console.log(JSON.stringify(links));
+         resolve(links);
+      });
+
+    });
   });
+
 }
 
 
@@ -36,15 +38,22 @@ function get_links(username, callback) {
 app.get('/', function (req, res) {
   if (typeof req.query.name !== 'undefined' && req.query.name) {
     let usuari = req.query.name;
-    var llista_users = get_links2(usuari);
-    console.log(get_links(usuari));
-    //console.log(req.query.name);
-    res.render('index', {
-      title: 'Links from user',
-      user: usuari,
-      links: llista_users,
-      usuarios: usuaris
+    get_links(usuari).then( function(users){
+      llista_users = [];
+      llista_users = users;
+      res.render('index', {
+        title: 'Links from user',
+        user: usuari,
+        links: llista_users,
+        usuarios: usuaris
+      });
+
+    }).catch(function (err) {
+      console.error(err.stack);
     });
+    
+    //console.log(req.query.name);
+
   }
   else {
     res.render('index', {
