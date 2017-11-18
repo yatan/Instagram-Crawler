@@ -18,5 +18,6 @@ block content
 
     for usuario in usuarios
         tr
-        td=usuario
+        td
+            a(href="/?name="+usuario)= usuario
         //td=usuario.edad
