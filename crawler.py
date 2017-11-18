@@ -1,8 +1,11 @@
 import urllib2
-import sys
+import sys, subprocess, time
 # import re
 from threading import Thread
 from bs4 import BeautifulSoup
+
+max_crawl = 5
+actual_crawl = 0
 
 
 # GET user value from argument or using 'default'
@@ -33,6 +36,10 @@ class Crawler(Thread):
 
 
     def parse_users(self, soup):
+
+        global actual_crawl
+        global max_crawl
+
         file_users = open("users_" + active_user + ".txt","w") 
         for coses in soup.find_all('a'):
             #print coses.get('a')
@@ -42,6 +49,7 @@ class Crawler(Thread):
                 if "@" in tag:
                     tag2 = tag.split(' ')
                     for element in tag2:
+                        # Detecta si es usuari
                         if "@" in element:
                             usuari = element.replace("@", "")
                             if usuari not in self.users:
@@ -52,9 +60,22 @@ class Crawler(Thread):
                             #print element
         file_users.close()
         #Add user to users analized
-        file_users_analized = open("analized_users.txt","w")
+        file_users_analized = open("analized_users.txt","w+")
         file_users_analized.write(self.active_user + "\n")
         file_users_analized.close() 
+        actual_crawl -= 1
+
+
+
+        for usuari in self.users:
+            if actual_crawl > max_crawl:
+                # Add a little time
+                time.sleep(5)
+            else:
+                print "worker " + usuari
+                actual_crawl += 1
+                self.child = subprocess.Popen([sys.executable, './crawler.py', usuari])
+
 
 
     def join( self ):
