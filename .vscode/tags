@@ -4,10 +4,21 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-conv	../crawler.py	/^    conv = str(coses)$/;"	kind:variable	line:15
+Crawler	../crawler.py	/^class Crawler(Thread):$/;"	kind:class	line:17
+__init__	../crawler.py	/^    def __init__(self, active_user):$/;"	kind:member	line:22
+active_user	../crawler.py	/^    active_user = ""$/;"	kind:variable	line:20
+active_user	../crawler.py	/^    active_user = sys.argv[1]$/;"	kind:variable	line:14
+active_user	../crawler.py	/^active_user = "twittersoz"$/;"	kind:variable	line:12
+actual_crawl	../crawler.py	/^actual_crawl = 0$/;"	kind:variable	line:8
 crawler.py	../crawler.py	1;"	kind:file	line:1
-html	../crawler.py	/^html = response.read()$/;"	kind:variable	line:6
-response	../crawler.py	/^response = urllib2.urlopen('https:\/\/www.instagram.com\/twittersoz\/')$/;"	kind:variable	line:5
-soup	../crawler.py	/^soup = BeautifulSoup(html, "html.parser")$/;"	kind:variable	line:7
-tag2	../crawler.py	/^            tag2 = tag.split(' ')$/;"	kind:variable	line:18
-users	../crawler.py	/^users = []$/;"	kind:variable	line:9
+driver	../get_data.py	/^driver = webdriver.Firefox()$/;"	kind:variable	line:5
+e	../crawler.py	/^e = Crawler(active_user)$/;"	kind:variable	line:89
+get_data.py	../get_data.py	1;"	kind:file	line:1
+join	../crawler.py	/^    def join( self ):$/;"	kind:member	line:81
+max_crawl	../crawler.py	/^max_crawl = 5$/;"	kind:variable	line:7
+parse_users	../crawler.py	/^    def parse_users(self, soup):$/;"	kind:member	line:38
+run	../crawler.py	/^    def run (self):$/;"	kind:member	line:27
+scanned_users	../crawler.py	/^    scanned_users = []$/;"	kind:variable	line:19
+soup	../get_data.py	/^soup = BeautifulSoup(driver.page_source)$/;"	kind:variable	line:8
+url	../get_data.py	/^url = 'http:\/\/instagram.com\/umnpics\/'$/;"	kind:variable	line:4
+users	../crawler.py	/^    users = []$/;"	kind:variable	line:18
