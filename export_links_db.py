@@ -14,17 +14,29 @@ def get_links(username):
         file_links.close()
     return links
 
+def check_existed_user(username):
+    cursor = db.cursor()
+    cursor.execute('SELECT COUNT(*) FROM links WHERE nickname="' + username + '"')
+    if cursor.fetchone()[0] == 0:
+        return False
+    else:
+        return True
+    
+    
+
 cursor = db.cursor()
 for filename in os.listdir('.'):
     # print filenames of dir
     if ("links_" in filename):
         user = filename.split("links_")[1]
         userbo = user.split(".txt")[0]
-        llistat = get_links(userbo)
-        #Insert link
-        for link in llistat:
-            cursor.execute('''INSERT INTO links(nickname, link) VALUES(?,?)''', ((userbo,link, )) )
-            print "Adding: " + userbo + " amb link: " + link + " to DB."
+        if not check_existed_user(userbo):
+            llistat = get_links(userbo)
+            #Insert link
+            for link in llistat:
+                cursor.execute('''INSERT INTO links(nickname, link) VALUES(?,?)''', ((userbo,link, )) )
+                print "Adding: " + userbo + " amb link: " + link + " to DB."
+
 
 db.commit()
 
