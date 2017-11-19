@@ -11,3 +11,7 @@ export_links_db.py --- Insertar links dels txt a la db
 *****************************************************************
 
 get_data_from_image.py --- Obtenir informació sobre la imatge desde la API Clarifai
+*****************************************************************
+
+cd web/
+node app.js

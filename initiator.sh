@@ -15,6 +15,9 @@ echo "4 - Exget_images_from_profile.pyportar users --> DB  (export_users_db.py)"
 echo "5 - Exportar links --> DB (export_links_db.py)"
 echo "************************"
 echo "6 - Obtenir informació de les imatges via Clarifi API (get_data_from_image.py)"
+echo "************************"
+echo "7 - Executar server (node app.js)"
+echo "************************"
 read menu
 
 case "$menu" in
@@ -35,6 +38,10 @@ python export_links_db.py
 ;;
 6)
 python get_data_from_image.py
+;;
+7)
+cd web/
+node app.js
 ;;
 *) echo "Opcio incorrecta"
    ;;
