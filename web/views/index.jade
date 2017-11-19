@@ -8,6 +8,9 @@ block content
   else if(tipos)
     h1 #{title} #{photo}
     a(href="/") HOME
+  else if(search)
+    h1 #{title} #{type}
+    a(href="/") HOME
   else
     h1= title
     p Welcome to #{title}
@@ -19,6 +22,9 @@ block content
             th Image
         else if(tipos)
             th Tipo
+            th Posibilitat
+        else if(search)
+            th Link_ID
             th Posibilitat
         else
             th Nombre
@@ -43,6 +49,11 @@ block content
             tr
             td=tipo.type
             td=tipo.posible
+    else if(search)
+        for item in search
+            tr
+            td=item.link_id
+            td=item.posible
     else
         for usuario in usuarios
             tr
