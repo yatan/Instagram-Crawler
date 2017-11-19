@@ -82,7 +82,7 @@ class Crawler(Thread):
                 time.sleep(5)
             else:
                 print "worker " + usuari
-                if ( check_exist(usuari) == False):
+                if ( self.check_exist(usuari) == False):
                     actual_crawl += 1
                     self.child = subprocess.Popen([sys.executable, './crawler.py', usuari])
 
