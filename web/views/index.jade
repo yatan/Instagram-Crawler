@@ -28,13 +28,8 @@ block content
             th Posibilitat
         else
             th Nombre
-        //th Edad
+
     tbody
-     //- 
-        if(links)
-            tr
-            td=usuario.nickname
-            td=usuario.link
 
     if(links)
         for link in links
@@ -52,14 +47,15 @@ block content
     else if(search)
         for item in search
             tr
-            td=item.link_id
+            td
+                a(href="/?photo="+item.link_id)= item.link_id
             td=item.posible
     else
         for usuario in usuarios
             tr
             td
                 a(href="/?name="+usuario)= usuario
-        //td=usuario.edad
+
 
 h2 Buscador:        
 div
