@@ -1,6 +1,26 @@
+style.
+    h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #4CAF50;
+    }
 
+    body {
+        text-align: center;
+    }
+
+    table {
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto; 
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
  
 block content
+  link(rel='stylehseet', link='/static/main.css')
   title Crawler HackEPS
   if(links)
     h1 #{title} #{user}

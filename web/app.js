@@ -65,6 +65,8 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 
+app.use('/static', express.static('public'));
+
 function buscar_tipo(tipo) {
   return new Promise(function (resolve, reject) {
 
