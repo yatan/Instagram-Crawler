@@ -55,6 +55,9 @@ function get_photo_details(photo_id) {
 
 }
 
+app.post('/buscar', function(req, res) {
+  console.log(req.body);
+});
 
 
 

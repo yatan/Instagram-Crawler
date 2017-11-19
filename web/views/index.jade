@@ -1,6 +1,7 @@
 
  
 block content
+  title Crawler HackEPS
   if(links)
     h1 #{title} #{user}
     a(href="/") HOME
@@ -48,3 +49,13 @@ block content
             td
                 a(href="/?name="+usuario)= usuario
         //td=usuario.edad
+
+h2 Buscador:        
+div
+   form(action='/buscar',method='post')
+     div(data-role='fieldcontain')
+       fieldset(data-role='controlgroup')
+         label(for='tipo') Tipo: 
+         input(id='tipo',type='text',value='',placeholder='#')
+     div(data-role='fieldcontain')   
+       input(type='submit',value='Buscar !',data-transition='fade', data-theme='c')  
