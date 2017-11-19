@@ -69,7 +69,7 @@ class Crawler(Thread):
                             #print element
         file_users.close()
         #Add user to users analized
-        file_users_analized = open("analized_users.txt","w")
+        file_users_analized = open("analized_users.txt","a")
         file_users_analized.write(self.active_user + "\n")
         file_users_analized.close() 
         actual_crawl -= 1
