@@ -5,7 +5,8 @@ block content
     h1 #{title} #{user}
     a(href="/") HOME
   else if(tipos)
-    h1 #{title}
+    h1 #{title} #{photo}
+    a(href="/") HOME
   else
     h1= title
     p Welcome to #{title}
@@ -31,9 +32,11 @@ block content
     if(links)
         for link in links
             tr
-            td=link
+            td
+                a(href="/?photo="+link.id)= link.link
             td 
-                img(src=link)
+                a(href="/?photo="+link.id)
+                    img(src=link.link)
     else if(tipos)
         for tipo in tipos
             tr

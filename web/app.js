@@ -24,9 +24,9 @@ function get_links(username) {
       var links = [];
       db.all("SELECT * FROM links WHERE nickname=?", username, function (err, rows) {
         rows.forEach(element => {
-          links.push(element.link);
+          links.push({ id: element.id , link: element.link });
         });
-        console.log(links);
+        // console.log(links);
         resolve(links);
       });
 
