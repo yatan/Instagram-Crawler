@@ -26,10 +26,28 @@ function get_links(username) {
         rows.forEach(element => {
           links.push(element.link);
         });
-        //links.push(row.link);
-         //console.log(JSON.stringify(links));
-         console.log(links);
-      resolve(links);
+        console.log(links);
+        resolve(links);
+      });
+
+    });
+  });
+
+}
+
+
+function get_photo_details(photo_id) {
+
+  return new Promise(function (resolve, reject) {
+
+    db.serialize(function () {
+      var details = [];
+      db.all("SELECT type, posible FROM data WHERE link_id=?", photo_id, function (err, rows) {
+        rows.forEach(element => {
+          details.push({ type: element.type, posible: element.posible });
+        });
+        //console.log(details);
+        resolve(details);
       });
 
     });
@@ -39,10 +57,12 @@ function get_links(username) {
 
 
 
+
 app.get('/', function (req, res) {
+  // User INFO
   if (typeof req.query.name !== 'undefined' && req.query.name) {
     let usuari = req.query.name;
-    get_links(usuari).then( function(users){
+    get_links(usuari).then(function (users) {
       llista_users = [];
       llista_users = users;
       res.render('index', {
@@ -55,9 +75,24 @@ app.get('/', function (req, res) {
     }).catch(function (err) {
       console.error(err.stack);
     });
-    
     //console.log(req.query.name);
+  } // Photo INFO
+  else if (typeof req.query.photo !== 'undefined' && req.query.photo) {
+    let photo = req.query.photo;
+    get_photo_details(photo).then(function (tipos) {
+      llista_tipos = [];
+      llista_tipos = tipos;
+      //console.log(llista_tipos);
+      res.render('index', {
+        title: 'Details from photo',
+        photo: photo,
+        tipos: llista_tipos
+      });
 
+    }).catch(function (err) {
+      console.error(err.stack);
+    });
+    //console.log(req.query.name);
   }
   else {
     res.render('index', {

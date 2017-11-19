@@ -4,6 +4,8 @@ block content
   if(links)
     h1 #{title} #{user}
     a(href="/") HOME
+  else if(tipos)
+    h1 #{title}
   else
     h1= title
     p Welcome to #{title}
@@ -13,6 +15,9 @@ block content
         if(links)
             th Links
             th Image
+        else if(tipos)
+            th Tipo
+            th Posibilitat
         else
             th Nombre
         //th Edad
@@ -29,7 +34,11 @@ block content
             td=link
             td 
                 img(src=link)
-            
+    else if(tipos)
+        for tipo in tipos
+            tr
+            td=tipo.type
+            td=tipo.posible
     else
         for usuario in usuarios
             tr
