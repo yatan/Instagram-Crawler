@@ -1,0 +1,13 @@
+
+crawler.py ---- Inici crawler --- Cal parar-lo forçosament !!!!!!!
+
+get_images_from_profile.py  --- Obtenir imatges del perfil i guardarles al txt del usuari
+
+export_users_db.py --- Transferir usuaris dels txt a la db
+
+export_links_db.py --- Insertar links dels txt a la db 
+
+
+*****************************************************************
+
+get_data_from_image.py --- Obtenir informació sobre la imatge desde la API Clarifai
