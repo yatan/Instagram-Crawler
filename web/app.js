@@ -3,6 +3,7 @@ var app = express();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./data/crawler');
 var path = require('path');
+var bodyParser = require('body-parser');
 
 var usuaris = [];
 
@@ -55,8 +56,20 @@ function get_photo_details(photo_id) {
 
 }
 
-app.post('/buscar', function(req, res) {
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
+
+app.use('/buscar', function(req, res) {
   console.log(req.body);
+  res.setHeader('Content-Type', 'text/plain')
+  res.write('you posted:\n')
+  res.end(JSON.stringify(req.body, null, 2))
 });
 
 
