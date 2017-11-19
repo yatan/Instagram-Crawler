@@ -34,6 +34,15 @@ class Crawler(Thread):
         # Parse users
         self.parse_users(soup)
 
+    def check_exist(self, username):
+        file_users_analized = open("analized_users.txt","r")
+        loglist = file_users_analized.readlines()
+        file_users_analized.close()
+        found = False
+        for line in loglist:
+            if str(username) in line:
+                found = True
+        return found
 
     def parse_users(self, soup):
 
@@ -60,7 +69,7 @@ class Crawler(Thread):
                             #print element
         file_users.close()
         #Add user to users analized
-        file_users_analized = open("analized_users.txt","w+")
+        file_users_analized = open("analized_users.txt","w")
         file_users_analized.write(self.active_user + "\n")
         file_users_analized.close() 
         actual_crawl -= 1
@@ -73,8 +82,9 @@ class Crawler(Thread):
                 time.sleep(5)
             else:
                 print "worker " + usuari
-                actual_crawl += 1
-                self.child = subprocess.Popen([sys.executable, './crawler.py', usuari])
+                if ( check_exist(usuari) == False):
+                    actual_crawl += 1
+                    self.child = subprocess.Popen([sys.executable, './crawler.py', usuari])
 
 
 
