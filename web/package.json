@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "constantinople": "^4.0.1",
     "express": "^4.16.2",
-    "jade": "^1.11.0"
+    "jstransformer": "^1.0.0",
+    "pug": "^3.0.2"
   }
 }
