@@ -92,22 +92,18 @@ class Crawler(Thread):
             actual_crawl -= 1
 
         for usuari in self.users:
-            with actual_crawl_lock:
-                if actual_crawl > max_crawl:
-                    need_sleep = True
-                else:
-                    need_sleep = False
-            if need_sleep:
-                time.sleep(5)
-            else:
-                try:
-                    print("worker " + usuari)
-                except Exception:
-                    print("worker (usuario con caracteres especiales)")
-                if not self.check_exist(usuari):
-                    with actual_crawl_lock:
+            while True:
+                with actual_crawl_lock:
+                    if actual_crawl < max_crawl:
                         actual_crawl += 1
-                    self.child = subprocess.Popen([sys.executable, os.path.abspath(__file__), usuari])
+                        break
+                time.sleep(1)  # Espera activa hasta que haya slot libre
+            try:
+                print("worker " + usuari)
+            except Exception:
+                print("worker (usuario con caracteres especiales)")
+            if not self.check_exist(usuari):
+                self.child = subprocess.Popen([sys.executable, os.path.abspath(__file__), usuari])
 
     def join(self):
         Thread.join(self)
