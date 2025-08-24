@@ -41,7 +41,7 @@ for row in cursor:
         cursor2 = db.cursor()
         for concept in concepts:
             cursor2.execute('INSERT INTO data(link_id, type, posible) VALUES(?,?,?)', ((str(row[0]), concept['name'], str(concept['value'])) ))
-            print("Adding id: " + str(row[0]) + " " + concept['name'] + ":" + str(concept['value']) + " to DB.")
+            print(f"Adding id: {row[0]} {concept['name']}:{concept['value']} to DB.")
         # Write Changes
         db.commit()
     else:
