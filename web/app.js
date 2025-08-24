@@ -72,7 +72,7 @@ function buscar_tipo(tipo) {
 
     db.serialize(function () {
       var details = [];
-      db.all("SELECT link_id, posible FROM data WHERE type LIKE '%"+tipo+"%'", function (err, rows) {
+      db.all("SELECT link_id, posible FROM data WHERE type LIKE ?", ["%" + tipo + "%"], function (err, rows) {
         rows.forEach(element => {
           details.push({ link_id: element.link_id, posible: element.posible });
         });
