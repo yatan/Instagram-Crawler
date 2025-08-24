@@ -31,7 +31,7 @@ for row in cursor:
     # row['name'] returns the name column in the query, row['email'] returns email column.
     photo_id = str(row[0])
     if not check_existed_link_id(photo_id):
-        print("Geting info id: " + photo_id + " url: " + row[2])
+        print(f"Getting info id: {photo_id} url: {row[2]}")
 
         #print('Getting info link id {0} = {1}'.format(row["id"], row["link"]))
         # Get API info to DB
