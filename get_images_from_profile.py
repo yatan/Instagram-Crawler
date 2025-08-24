@@ -30,7 +30,7 @@ def get_img_url(url):
         direccions.append( foto.get('src', '') )
 
     driver.close()
-    print direccions
+    print(direccions)
     return direccions
 
 for filename in os.listdir('.'):
@@ -44,5 +44,3 @@ for filename in os.listdir('.'):
             for items in links:
                 file_links.write(items + "\n")
             file_links.close()
-
-
