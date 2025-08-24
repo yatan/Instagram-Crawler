@@ -22,7 +22,7 @@ for filename in os.listdir('.'):
         userbo = user.split(".txt")[0]
         #Insert userbo
         cursor.execute('''INSERT INTO users(nickname) VALUES(?)''', ((userbo,)) )
-        print("Adding: " + userbo + " to DB.")
+        print(f"Adding: {userbo} to DB.")
 
 db.commit()
 
