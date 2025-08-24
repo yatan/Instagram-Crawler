@@ -45,6 +45,6 @@ for row in cursor:
         # Write Changes
         db.commit()
     else:
-        print(photo_id + " ja existeix.")
+        print(f"{photo_id} ja existeix.")
 
 db.close()
