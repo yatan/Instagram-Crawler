@@ -35,7 +35,7 @@ for filename in os.listdir('.'):
             #Insert link
             for link in llistat:
                 cursor.execute('''INSERT INTO links(nickname, link) VALUES(?,?)''', ((userbo,link, )) )
-                print("Adding: " + userbo + " amb link: " + link + " to DB.")
+                print(f"Adding: {userbo} amb link: {link} to DB.")
 
 
 db.commit()
